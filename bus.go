@@ -2,14 +2,14 @@ package pegaso
 
 import "sync"
 
-// CommandBus handles susbcribers
-type CommandBus struct {
+// Bus handles susbcribers
+type Bus struct {
 	subscribers []chan interface{}
 	m           sync.Mutex
 }
 
 // Subscribe adds access to a channel to the bus to receive messages
-func (b *CommandBus) Subscribe(c chan interface{}) {
+func (b *Bus) Subscribe(c chan interface{}) {
 	b.m.Lock()
 
 	defer b.m.Unlock()
@@ -18,7 +18,7 @@ func (b *CommandBus) Subscribe(c chan interface{}) {
 }
 
 // Publish a payload into the channel, each subscriber receives the payload
-func (b *CommandBus) Publish(e interface{}) {
+func (b *Bus) Publish(e interface{}) {
 	go func() {
 		b.m.Lock()
 		defer b.m.Unlock()

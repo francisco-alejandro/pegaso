@@ -12,7 +12,7 @@ func TestPubSub(t *testing.T) {
 	ch1 := make(chan interface{})
 	ch2 := make(chan interface{})
 
-	bus := pegaso.CommandBus{}
+	bus := pegaso.Bus{}
 
 	bus.Subscribe(ch1)
 	bus.Subscribe(ch2)
